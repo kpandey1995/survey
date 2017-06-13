@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="UserHome" method="post" class="form-group">
+
+            <!--Personal Details-->
+
+            <div class="container-fluid" id="perDet">
+                <h3>Personal Details</h3>
+                <div style="margin-top: 6%">
+                    <div class="form-group col-lg-12">
+                        <label class="col-md-4 control-label" for="textinput">Enter your Employee ID</label>  
+                        <!--<div class="col-md-4">-->
+                        <input type="textinput" id="emplID" type="number" placeholder="Employee ID" class="form-control input-md">
+                        <!--                            </div>-->
+                    </div>
+                    <br>
+                    <div class="form-group col-lg-12">
+                        <label class="col-md-4 control-label" for="textinput">Enter your Name</label>  
+                        <!--                            <div class="col-md-4">-->
+                        <input type="textinput" id="userName" type="text" placeholder="Your Name" class="form-control input-md text-capitalize">
+                        <!--</div>-->
+                    </div><br>
+                    <div class="form-group col-lg-12">
+                        <label class="col-md-4 control-label" for="textinput">Date of Birth</label>  
+                        <!--<div class="col-md-4">-->
+                        <input type="date" id="userDOB" type="date" placeholder="DOB" class="form-control input-md">
+                        <!--</div>-->
+                    </div><br>
+                    <div class="form-group col-lg-12">
+                        <label class="col-md-4 control-label" for="textinput">Date of Joining</label>  
+                        <!--<div class="col-md-4">-->
+                        <input type="date" id="userDOJ" type="date" placeholder="DOJ" class="form-control input-md">
+                        <!--</div>-->
+                    </div><br>
+                    <div class="form-group col-lg-12">
+                        <label class="col-md-4 control-label" for="textinput">Enter Aadhaar Number</label>  
+                        <!--<div class="col-md-4">-->
+                        <input type="textinput" id="userAadhaarNumber" type="number" placeholder="Aadhaar Number" class="form-control input-md">
+                        <!--</div>-->
+                    </div><br>
+                    <div class="form-group col-lg-12">
+                        <label class="col-md-4 control-label" for="textinput">Enter Mobile Number</label>  
+                        <!--<div class="col-md-4">-->
+                        <input type="textinput" id="userMobile" type="number" placeholder="Mobile Number" class="form-control input-md">
+                        <!--</div>-->
+                    </div><br>
+                    <div class="form-group col-lg-12">
+                        <label class="col-md-4 control-label" for="textinput">Present Address with district and pincode</label>  
+                        <!--<div class="col-md-4">-->
+                        <textarea type="textinput" id="presentAddress" placeholder="Present Address" class="form-control input-md"></textarea>
+                        <!--</div>-->
+                    </div><br>
+                    <div class="form-group col-lg-12">
+                        <label class="col-md-4 control-label" for="textinput">Permanent Address with district and pincode</label>  
+                        <!--<div class="col-md-4">-->
+                        <textarea type="textinput" id="permanentAddress" type="" placeholder="Permanent Address" class="form-control input-md"></textarea>
+                    </div><br>
+                    <div class="form-group col-lg-12">
+                        <label class="col-md-4 control-label" for="textinput">Permanent Address with district and pincode</label>  
+                        <!--<div class="col-md-4">-->
+                        <select id="marital"  class="form-control input-md">
+                            <option value="dummy" selected disabled>Select One</option>
+                            <option value="single" >Single</option>
+                            <option value="married" >married</option>
+                        </select>
+                    </div><br>
+                    <!--</div>-->
+                    <div class="form-group col-lg-12" style="margin-top: 5%">
+                        <input type="button" class="col-lg-2 btn btn-default" id="perBtn" value="Submit">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <script src="Assets/plugins/jquery/jquery.min.js" type="text/javascript"></script>
+
+        <script>
+            $("document").ready(function () {
+                $("#perBtn").click(function () {
+                    console.log($("#emplID").val());
+                    $.ajax({
+                        method: "POST",
+                        url: "AddEmp",
+                        data: {
+                            EmpID: $("#emplID").val(),
+                            EmpName: $("#userName").val(),
+                            EmpDOB: $("#userDOB").val(),
+                            EmpDOJ: $("#userDOJ").val(),
+                            EmpAadharNo: $("#userAadhaarNumber").val(),
+                            EmpMobileNo: $("#userMobile").val(),
+                            EmpPresentAddress: $("#presentAddress").val(),
+                            EmpPermanantAddress: $("#permanentAddress").val(),
+                            EmpMarital: $("#marital").val()
+
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            if (data === "true") {
+                                alert("success");
+                                window.location.href="fatch.jsp";
+//                                location.reload();
+                            } else {
+                                alert(data);
+                            }
+                        }
+                    });
+                });
+            });
+        </script>            
+    </body>
+</html>
